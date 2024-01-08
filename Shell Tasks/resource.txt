@@ -1,0 +1,5 @@
+tmux: https://tmuxcheatsheet.com/
+https://github.com/mertcangokgoz/UsefulBashScripts/blob/master/Scripts/CheckFQDN.sh
+https://github.com/NishkarshRaj/Automation-using-Shell-Scripts/blob/master/Automation%20Scenarios%20that%20save%20time/Scenario1.sh
+https://github.com/anilskalyane/Bash-Scripts/blob/master/mysql-backup-and-send-mail.sh
+https://devopscube.com/linux-shell-scripting-for-devops/

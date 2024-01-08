@@ -1,0 +1,146 @@
+1) Write Shell script to print the "Shell Script is usefull to automate regular task"
+#!/bin/bash
+echo "Shell Script is usefull to automate regular task"
+
+2) Modify the shell script from exercise 1 to include a variable. The variable will hold the contents of the messag 
+"Shell Script is usefull to automate regular task"
+#!/bin/bash
+data="Shell Script is usefull to automate regular task"
+echo $data
+
+3) Store the output of the command "hostname" in variable and display like "Shell script is running on [output of hostname cmd]".
+#!/bin/bash
+hostn=$(hostname)
+echo "Shell script is running on $hostn"
+
+
+4)  Write shell script to check Whether  provide file or directory is exist or not if it doesn't exist display "file is not exist".
+if file is exist then check exute permission of file or directory, if execution permission has file / dir display "file/dir has execution perm"
+doesn't, display "file/dir doesn't has execution perm"
+#!/bin/bash
+read -p "Please Enter the path of file or directory" path
+if [ -e $path ];then
+  echo "$path is exist"
+     if [ -x $path ];then 
+	    echo "$path has x perm"
+	 else
+	    echo "$path doesn't has x perm"
+	 fi
+else
+  echo "$path is not exist"
+fi
+
+
+5) Write shell script to display "Red, Blue, Green, Yellow, Orange" color names in seperate line indivudually. 
+#!/bin/bash
+color=(Red Blue Green Yellow Orange)
+for i in ${color[*]}
+  do 
+    echo $i
+  done
+ 
+ 
+6) Write shecll script to check whether file or directory, 
+if it is a file display messag "It is a regular file" along with long list format, otherwise display "it is directory" with long list format.
+
+#!/bin/bash
+read -p "Please Enter the file for directory: " path
+
+if [ -n "${path}" ];then
+  if [ -f $path ]; then
+     echo "$path is file"
+     ls -ltr $path
+  elif [ -d $path ]; then
+     echo "$path is directory"
+     ls -ltr $path
+  else
+     echo "$path it is another type of file"
+  fi
+else
+  echo "Pleae provide the file or directory path"
+fi
+
+
+7) Write shell script to accept an unlimited number of files and directories as arguments add this extnsion to the previous program.
+
+#!/bin/bash
+arg=$@
+
+if [ -n $arg ]; then
+  for i  in  ${arg};do 
+      if [ -f $i ];then  
+	    echo "$i is a regular file"
+		ls -ltr  $i
+	  elif [ -d $i ];then
+	    echo "$i is a directory"
+        ls -ltr $i
+      else
+		echo "$i is another type of file"
+	  fi
+  done
+else
+  echo "Please provide the arguments"
+fi
+
+8) Write a script that executes the command “cat /etc/shadow”. If the command return a 0 exit status, report “command succeeded” 
+and exit with a 0 exit status.
+If the command returns a non-zero exit status, report “Command failed” and exit with a 1 exit status.
+#!/bin/bash
+cat /etc/shadow
+
+if [ $? -eq 0 ];then
+  echo "Command Executed Successfully"
+  exit 0
+else
+  echo "Command Faild to Execute"
+  exit 1
+fi
+
+9) Write a shell script that consists of a function that displays the number of files in the present working directory. 
+Name this function “file_count” and call it in your script. If you use variable in your function, remember to make it a local variable.
+#!/bin/bash
+file_count  ( ){
+	arg=$1
+	count=$(ls -ltr $arg|wc -l)
+	echo $arg
+	echo $count
+}
+file_count /etc/
+file_count /var
+file_count /usr/bin  
+
+
+10) Write the shell script that renames all files in the current directory that end in “.jpg” to begin with today’s date in the 
+following format: YYYY-MM-DD. For example, if a picture of my cat was in the current directory and today was October 31,2016 it would 
+change name from “mycat.jpg” to “2016–10–31-mycat.jpg”.
+#!/bin/bash
+d=$(date +%F)
+cd $1
+for f  in  *.png
+do 
+	mv  ${f}  ${d}-${f}
+done
+
+
+11) Write the script that renames files based on the file extension. Next,It should ask the user what prefix to prepend to the file name(s). 
+By default, the prefix should be the current date in YYYY-MM-DD format. If the user simply press enter,the current date will be used. 
+Otherwise,whatever the user entered will be used as the prefix. Next,it should display the original file name and new name of the file.
+Finally,it should rename the file.
+
+#!/bin/bash
+d=$(date +%F)
+read -p "Please Enter the location: " path
+cd $path
+read -p "Please Enter the File Extension: " ext
+read -p "Please Enter the prefix Name: (Enter for Current Date Prefix): " c
+for  f  in *.${ext}
+do
+  if [ -z $c ];then
+      echo ${f}  ${d}-${f}
+      mv  ${f}  ${d}-${f}
+  else
+      echo ${f} ${c}-${f}
+      mv  ${f}  ${c}-${f}
+  fi
+done
+
